@@ -3,11 +3,11 @@ extends layout
 block content
   h1 Title: #{book.title}
 
-  p #[strong Author:]
+  p #[strong Author: ]
     a(href=book.author.url) #{book.author.name}
   p #[strong Summary:] #{book.summary}
   p #[strong Publisher:] #{book.publisher}
-  p #[strong Category:]
+  p #[strong Category: ]
     each val, index in book.category
       a(href=val.url) #{val.name}
       if index < book.category.length - 1
@@ -26,7 +26,7 @@ block content
         p.loaned #{copy.status}
       if copy.status=='Loaned'
         p #[strong Due back:] #{copy.due_back_formatted}
-      p #[strong Id:]
+      p #[strong Id: ]
         a(href=copy.url) #{copy._id}
 
     else
