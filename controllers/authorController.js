@@ -110,7 +110,7 @@ exports.author_delete_get = (req, res, next) => {
           return next(err);
         }
         if (results.author == null) {
-          res.redirect("/catalog/authors");
+          res.redirect("/catalogue/authors");
         }
         res.render("author_delete", {
           title: "Delete Author",
@@ -147,7 +147,7 @@ exports.author_delete_post = (req, res, next) => {
             if (err) {
             return next(err);
             }
-            res.redirect("/catalog/authors");
+            res.redirect("/catalogue/authors");
         });
         }
     );

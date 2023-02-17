@@ -103,7 +103,7 @@ exports.category_delete_get = (req, res, next) => {
           return next(err);
         }
         if (results.category == null) {
-          res.redirect("/catalog/categories");
+          res.redirect("/catalogue/categories");
         }
         res.render("category_delete", {
           title: "Delete Category",
@@ -142,7 +142,7 @@ exports.category_delete_post = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/catalog/categories");
+          res.redirect("/catalogue/categories");
         });
       }
     );

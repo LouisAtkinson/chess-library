@@ -104,7 +104,7 @@ exports.copy_delete_get = (req, res, next) => {
           return next(err);
         }
         if (results.copy == null) {
-          res.redirect("/catalog/copies");
+          res.redirect("/catalogue/copies");
         }
         res.render("copy_delete", {
           title: "Delete Copy",
@@ -131,7 +131,7 @@ exports.copy_delete_post = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/catalog/copies");
+          res.redirect("/catalogue/copies");
         });
       }
     );

@@ -40,8 +40,11 @@ button>a:hover {
   color: rgb(214, 156, 117)
 }
 
-
 button>a:active { text-decoration: none; }
+
+h1 {
+  margin-bottom: 40px;
+}
 
 .container, .sidebar, .topnav, .bottomnav {
   display: flex;
@@ -66,19 +69,23 @@ button>a:active { text-decoration: none; }
   background-color: var(--sidebarcolour);
   height: 100%;
   padding-top: 20px;
-  min-width: 150px;
+  min-width: 137px;
   padding-left: 5px;
 }
 
 .content {
   background-color: var(--backgroundcolour);
-  padding-top: 10px;
-  padding-left: 30px;
-  width: 100%;
+  padding-top: 20px;
+  padding-left: 40px;
+  max-width: 800px;
 }
 
 .headertext, .nav {
   color: white;
+}
+
+.headertext {
+  margin-bottom: 20px; 
 }
 
 .navbtn {
@@ -86,6 +93,12 @@ button>a:active { text-decoration: none; }
   border: none;
   text-align: left;
   margin-top: 10px;
+  font-size: 13px;
+}
+
+label {
+  display: inline-block;
+  width: 100px;
 }
 
 .available {
