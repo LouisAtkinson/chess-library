@@ -178,6 +178,70 @@ exports.book_create_post = [
   },
 ];
 
+exports.book_delete_get = (req, res, next) => {
+    async.parallel(
+      {
+        book(callback) {
+          Book.findById(req.params.id)
+            .populate("author")
+            .populate("category")
+            .exec(callback);
+        },
+        copy(callback) {
+          Copy.find({ book: req.params.id }).exec(callback);
+        },
+      },
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+        if (results.book == null) {
+          res.redirect("/catalog/books");
+        }
+        res.render("book_delete", {
+          title: "Delete Book",
+            book: results.book,
+            copies: results.copy,
+        });
+      }
+    );
+  };
+  
+exports.book_delete_post = (req, res, next) => {
+    async.parallel(
+      {
+        book(callback) {
+          Book.findById(req.body.bookid)
+            .populate("author")
+            .populate("category")
+            .exec(callback);
+        },
+        copy(callback) {
+          Copy.find({ book: req.body.bookid }).exec(callback);
+        },
+      },
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+        if (results.copy.length > 0) {
+          res.render("book_delete", {
+            title: "Delete Book",
+              book: results.book,
+              copies: results.copy,
+          });
+          return;
+        }
+        Book.findByIdAndRemove(req.body.bookid, (err) => {
+          if (err) {
+            return next(err);
+          }
+          res.redirect("/catalog/books");
+        });
+      }
+    );
+};
+
 exports.book_update_get = (req, res, next) => {
     async.parallel(
       {

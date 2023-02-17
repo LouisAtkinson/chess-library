@@ -6,7 +6,7 @@ block content
   p #[strong Author:]
     a(href=book.author.url) #{book.author.name}
   p #[strong Summary:] #{book.summary}
-  p #[strong ISBN:] #{book.isbn}
+  p #[strong Publisher:] #{book.publisher}
   p #[strong Category:]
     each val, index in book.category
       a(href=val.url) #{val.name}
@@ -24,7 +24,7 @@ block content
         p.reserved #{copy.status}
       else
         p.loaned #{copy.status}
-      if copy.status!='Available'
+      if copy.status=='Loaned'
         p #[strong Due back:] #{copy.due_back_formatted}
       p #[strong Id:]
         a(href=copy.url) #{copy._id}

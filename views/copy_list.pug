@@ -8,12 +8,12 @@ block content
       li
         a(href=copy.url) #{copy.book.title} -
         if copy.status=='Available'
-          span.available #{copy.status}
+          p.available #{copy.status}
         else if copy.status=='Reserved'
-          span.reserved #{copy.status}
+          p.reserved #{copy.status}
         else if copy.status=='Loaned'
-          span.loaned #{copy.status} 
-          (Due back: #{copy.due_back_formatted} )
+          p.loaned #{copy.status} 
+          p Due back: #{copy.due_back_formatted}
 
     else
       li There are no book copies in the library.

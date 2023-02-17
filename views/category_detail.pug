@@ -9,10 +9,16 @@ block content
     h4 Books
 
     dl
-      each book in genre_books
+      each book in category_books
         dt
           a(href=book.url) #{book.title}
         dd #{book.summary}
 
       else
         p This category has no books
+
+  hr
+  p
+    a(href=category.url+'/delete') Delete category
+  p 
+    a(href=category.url+'/update') Update category
