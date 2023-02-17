@@ -26,7 +26,7 @@ exports.index = (req, res) => {
     },
     (err, results) => {
       res.render("index", {
-        title: "Chess Library",
+        title: "Home",
         error: err,
         data: results,
       });

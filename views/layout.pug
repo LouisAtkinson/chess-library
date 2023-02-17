@@ -1,7 +1,38 @@
 doctype html
-html
+html(lang='en')
   head
     title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    div(class='container')
+      div(class='header')
+        h1 Chess Library
+      div(class='main')
+        div(class='sidebar')
+          block sidebar
+            div(class='nav')
+              div(class='topnav')
+                button
+                  a(href='/catalog') Home
+                button
+                  a(href='/catalog/books') All books
+                button
+                  a(href='/catalog/authors') All authors
+                button
+                  a(href='/catalog/categories') All categories
+                button
+                  a(href='/catalog/copies') All copies
+              div(class='bottomnav')    
+                button
+                  a(href='/catalog/author/create') Create new author
+                button
+                  a(href='/catalog/category/create') Create new category
+                button
+                  a(href='/catalog/book/create') Create new book
+                button
+                  a(href='/catalog/copy/create') Create new copy
+
+        div(class='content')
+          block content

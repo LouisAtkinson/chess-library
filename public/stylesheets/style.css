@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.container, .sidebar, .topnav, .bottomnav {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+}

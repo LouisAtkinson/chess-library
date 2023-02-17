@@ -1,35 +1,19 @@
-doctype html
-html(lang='en')
-  head
-    title= title
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    div(class='container')
-        div(class='sidebar')
-          block sidebar
-            div(class='nav')
-              div(class='topnav')
-                button
-                  a(href='/catalog') Home
-                button
-                  a(href='/catalog/books') All books
-                button
-                  a(href='/catalog/authors') All authors
-                button
-                  a(href='/catalog/categories') All categories
-                button
-                  a(href='/catalog/copies') All copies
-              div(class='bottomnav')    
-                button
-                  a(href='/catalog/author/create') Create new author
-                button
-                  a(href='/catalog/category/create') Create new category
-                button
-                  a(href='/catalog/book/create') Create new book
-                button
-                  a(href='/catalog/copy/create') Create new copy
+extends layout
 
-        div(class='main')
-          block content
+block content
+  h1= title
+  p This website was created using Express, Node.js and MongoDB. 
+
+  h2 Records
+
+  if error
+    p Error getting content.
+  else
+    p The library has the following record counts:
+
+    ul
+      li #[strong Books:] !{data.book_count}
+      li #[strong Copies:] !{data.copy_count}
+      li #[strong Copies available:] !{data.copy_available_count}
+      li #[strong Authors:] !{data.author_count}
+      li #[strong Categories:] !{data.category_count}
