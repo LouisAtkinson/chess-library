@@ -1,5 +1,7 @@
 const Copy = require("../models/copy");
 const async = require("async");
+const { body, validationResult } = require("express-validator");
+const Book = require("../models/book");
 
 exports.copy_list = function (req, res, next) {
     Copy.find()
@@ -33,3 +35,57 @@ exports.copy_detail = (req, res, next) => {
         });
       });
 };
+
+exports.copy_create_get = (req, res, next) => {
+    Book.find({}, "title").exec((err, books) => {
+      if (err) {
+        return next(err);
+      }
+      res.render("copy_form", {
+        title: "Create Copy",
+        book_list: books,
+      });
+    });
+  };
+  
+  exports.copy_create_post = [
+    body("book", "Book must be specified").trim().isLength({ min: 1 }).escape(),
+    body("status").escape(),
+    body("due_back", "Invalid date")
+      .optional({ checkFalsy: true })
+      .isISO8601()
+      .toDate(),
+  
+    (req, res, next) => {
+      const errors = validationResult(req);
+  
+      const copy = new Copy({
+        book: req.body.book,
+        status: req.body.status,
+        due_back: req.body.due_back,
+      });
+  
+      if (!errors.isEmpty()) {
+        Book.find({}, "title").exec(function (err, books) {
+          if (err) {
+            return next(err);
+          }
+          res.render("copy_form", {
+            title: "Create Copy",
+            book_list: books,
+            selected_book: copy.book._id,
+            errors: errors.array(),
+            copy,
+          });
+        });
+        return;
+      }
+  
+      copy.save((err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect(copy.url);
+      });
+    },
+];
