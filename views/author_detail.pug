@@ -13,6 +13,7 @@ block content
       each book in author_books
         dt
           a(href=book.url) #{book.title}
+        br
         dd #{book.summary}
 
       else

@@ -21,7 +21,7 @@ exports.index = (req, res) => {
       author_count(callback) {
         Author.countDocuments({}, callback);
       },
-      genre_count(callback) {
+      category_count(callback) {
         Category.countDocuments({}, callback);
       },
     },
@@ -196,7 +196,7 @@ exports.book_delete_get = (req, res, next) => {
           return next(err);
         }
         if (results.book == null) {
-          res.redirect("/catalog/books");
+          res.redirect("/catalogue/books");
         }
         res.render("book_delete", {
           title: "Delete Book",
@@ -236,7 +236,7 @@ exports.book_delete_post = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/catalog/books");
+          res.redirect("/catalogue/books");
         });
       }
     );

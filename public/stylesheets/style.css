@@ -1,17 +1,114 @@
+:root {
+  --headercolour: #31211a;
+  --sidebarcolour: #8b4a14;
+  --backgroundcolour: #e1d2b8;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: var(--backgroundcolour);
+}
+
+html, body {
+  width: 100vw;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
 }
 
 a {
-  color: #00B7FF;
+  color: #6d4700;
 }
+
+a.hover {
+  color: #4e3300;
+}
+
+button>a {
+  color: white;
+}
+
+button>a:link { text-decoration: none; }
+
+
+button>a:visited { text-decoration: none; }
+
+
+button>a:hover { 
+  text-decoration: none; 
+  color: rgb(214, 156, 117)
+}
+
+
+button>a:active { text-decoration: none; }
 
 .container, .sidebar, .topnav, .bottomnav {
   display: flex;
   flex-direction: column;
 }
 
+.container, .main {
+  height: 100%;
+  width: 100%;
+}
+
 .main {
   display: flex;
+}
+
+.header {
+  background-color: var(--headercolour);
+  padding-left: 20px;
+}
+
+.sidebar {
+  background-color: var(--sidebarcolour);
+  height: 100%;
+  padding-top: 20px;
+  min-width: 150px;
+  padding-left: 5px;
+}
+
+.content {
+  background-color: var(--backgroundcolour);
+  padding-top: 10px;
+  padding-left: 30px;
+  width: 100%;
+}
+
+.headertext, .nav {
+  color: white;
+}
+
+.navbtn {
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.available {
+  color: green;
+}
+
+.reserved {
+  color: rgb(214, 86, 0);
+}
+
+.loaned {
+  color: red;
+}
+
+.btn-primary {
+  background-color: rgb(224, 165, 131);
+  border: solid 1px black;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: rgb(199, 136, 100);
 }

@@ -12,7 +12,9 @@ block content
       each book in category_books
         dt
           a(href=book.url) #{book.title}
+        br
         dd #{book.summary}
+        br
 
       else
         p This category has no books

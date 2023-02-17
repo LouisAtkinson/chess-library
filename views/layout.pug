@@ -8,30 +8,32 @@ html(lang='en')
   body
     div(class='container')
       div(class='header')
-        h1 Chess Library
+        h1(class='headertext') Chess Library
       div(class='main')
         div(class='sidebar')
           block sidebar
             div(class='nav')
               div(class='topnav')
-                button
+                button(class='navbtn')
                   a(href='/catalogue') Home
-                button
+                br
+                button(class='navbtn')
                   a(href='/catalogue/books') All books
-                button
+                button(class='navbtn')
                   a(href='/catalogue/authors') All authors
-                button
+                button(class='navbtn')
                   a(href='/catalogue/categories') All categories
-                button
+                button(class='navbtn')
                   a(href='/catalogue/copies') All copies
+                br
               div(class='bottomnav')    
-                button
+                button(class='navbtn')
                   a(href='/catalogue/author/create') Create new author
-                button
+                button(class='navbtn')
                   a(href='/catalogue/category/create') Create new category
-                button
+                button(class='navbtn')
                   a(href='/catalogue/book/create') Create new book
-                button
+                button(class='navbtn')
                   a(href='/catalogue/copy/create') Create new copy
 
         div(class='content')
