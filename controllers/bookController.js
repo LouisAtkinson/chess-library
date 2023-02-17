@@ -177,3 +177,124 @@ exports.book_create_post = [
     });
   },
 ];
+
+exports.book_update_get = (req, res, next) => {
+    async.parallel(
+      {
+        book(callback) {
+          Book.findById(req.params.id)
+            .populate("author")
+            .populate("category")
+            .exec(callback);
+        },
+        authors(callback) {
+          Author.find(callback);
+        },
+        categories(callback) {
+          Category.find(callback);
+        },
+      },
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+        if (results.book == null) {
+          const err = new Error("Book not found");
+          err.status = 404;
+          return next(err);
+        }
+        for (const category of results.categories) {
+          for (const bookCategory of results.book.category) {
+            if (category._id.toString() === bookCategory._id.toString()) {
+              category.checked = "true";
+            }
+          }
+        }
+        res.render("book_form", {
+          title: "Update Book",
+          authors: results.authors,
+          categories: results.categories,
+          book: results.book,
+        });
+      }
+    );
+  };
+  
+  exports.book_update_post = [
+    (req, res, next) => {
+      if (!Array.isArray(req.body.category)) {
+        req.body.category =
+          typeof req.body.category === "undefined" ? [] : [req.body.category];
+      }
+      next();
+    },
+  
+    body("title", "Title must not be empty.")
+      .trim()
+      .isLength({ min: 1 })
+      .escape(),
+    body("author", "Author must not be empty.")
+      .trim()
+      .isLength({ min: 1 })
+      .escape(),
+    body("summary", "Summary must not be empty.")
+      .trim()
+      .isLength({ min: 1 })
+      .escape(),
+    body("publisher", "Publisher must not be empty").trim().isLength({ min: 1 }).escape(),
+    body("category.*").escape(),
+  
+    (req, res, next) => {
+      const errors = validationResult(req);
+  
+      const book = new Book({
+        title: req.body.title,
+        author: req.body.author,
+        summary: req.body.summary,
+        publisher: req.body.publisher,
+        category: typeof req.body.category === "undefined" ? [] : req.body.category,
+        _id: req.params.id,
+      });
+  
+      if (!errors.isEmpty()) {
+  
+        async.parallel(
+          {
+            authors(callback) {
+              Author.find(callback);
+            },
+            categories(callback) {
+              Category.find(callback);
+            },
+          },
+          (err, results) => {
+            if (err) {
+              return next(err);
+            }
+  
+            for (const category of results.categories) {
+              if (book.category.includes(category._id)) {
+                category.checked = "true";
+              }
+            }
+            res.render("book_form", {
+              title: "Update Book",
+              authors: results.authors,
+              categories: results.categories,
+              book,
+              errors: errors.array(),
+            });
+          }
+        );
+        return;
+      }
+  
+      Book.findByIdAndUpdate(req.params.id, book, {}, (err, thebook) => {
+        if (err) {
+          return next(err);
+        }
+  
+        res.redirect(thebook.url);
+      });
+    },
+  ];

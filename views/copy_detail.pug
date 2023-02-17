@@ -18,3 +18,9 @@ block content
 
   if copy.status!='Available'
     p #[strong Due back:] #{copy.due_back_formatted}
+
+  hr
+  p
+    a(href=copy.url+'/delete') Delete copy
+  p
+    a(href=copy.url+'/update') Update copy
